@@ -255,7 +255,7 @@
       <h1>beer party it hub<small>вечер без дейликов, тикетов и созвонов</small></h1>
       <ul class="facts">
         <li><span class="k">когда</span><span class="v" id="f-date">Дата уточняется</span></li>
-        <li><span class="k">время</span><span class="v">19:00 — 23:00<small>дальше — по желанию</small></span></li>
+        <li><span class="k">время</span><span class="v">16:00 — 00:00<small>дальше — по желанию</small></span></li>
         <li><span class="k">где</span><span class="v">Измайловское ш., 73Ж, стр. 33<small>м. Партизанская</small></span></li>
       </ul>
       <div class="countdown" id="countdown" aria-live="polite">
@@ -280,13 +280,14 @@
     <section id="program">
       <h2>программа</h2>
       <ol class="prog">
-        <li><time>19:00</time><div><div class="t">Сбор гостей</div><div class="d">Welcome-drink, знакомимся и осматриваемся</div></div></li>
-        <li><time>19:30</time><div><div class="t">Открытие</div><div class="d">Пара слов от организаторов, без презентаций</div></div></li>
-        <li><time>20:00</time><div><div class="t">Пиво, пицца и еда</div><div class="d">Едим, пьём и болтаем не про работу</div></div></li>
-        <li><time>21:00</time><div><div class="t">Активности</div><div class="d">Квиз, игры, конкурсы</div></div></li>
-        <li><time>22:30</time><div><div class="t">Общее фото на память</div><div class="d">Собираемся все вместе в кадре</div></div></li>
-        <li><time>23:00</time><div><div class="t">Официальное завершение</div><div class="d">Можно ехать домой, пока ходит метро</div></div></li>
-        <li><time>23:00+</time><div><div class="t">Продолжение<span class="opt">по желанию</span></div><div class="d">Для тех, кто не готов расходиться</div></div></li>
+        <li><time>16:00</time><div><div class="t">Сбор гостей</div><div class="d">Welcome-drink, знакомимся и осматриваемся</div></div></li>
+        <li><time>16:30</time><div><div class="t">Открытие</div><div class="d">Пара слов от организаторов, без презентаций</div></div></li>
+        <li><time>17:00</time><div><div class="t">Пиво, пицца и еда</div><div class="d">Едим, пьём и болтаем не про работу</div></div></li>
+        <li><time>19:00</time><div><div class="t">Активности</div><div class="d">Квиз, игры, конкурсы</div></div></li>
+        <li><time>21:00</time><div><div class="t">Общее фото на память</div><div class="d">Собираемся все вместе в кадре</div></div></li>
+        <li><time>21:30</time><div><div class="t">Музыка и общение</div><div class="d">Свободная программа</div></div></li>
+        <li><time>00:00</time><div><div class="t">Официальное завершение</div><div class="d">Можно ехать домой, пока ходит метро</div></div></li>
+        <li><time>00:00+</time><div><div class="t">Продолжение<span class="opt">по желанию</span></div><div class="d">Для тех, кто не готов расходиться</div></div></li>
       </ol>
       <p class="note">Программа предварительная. Если что-то поменяется, напишем в боте.</p>
       <div class="pills" style="margin-top:16px"><a class="pill ghost" id="cal-btn" href="#" target="_blank" rel="noopener" aria-disabled="true">добавить в календарь</a></div>
@@ -344,8 +345,9 @@
     <!-- FAQ -->
     <section id="faq">
       <h2>вопросы</h2>
+      <details><summary>Будет ли пиво?</summary><p>Будет, но в ограниченном количестве.</p></details>
       <details><summary>Можно прийти с +1?</summary><p>Нет, собираемся только командой.</p></details>
-      <details><summary>Я опоздаю — это ок?</summary><p>Конечно. Приходите, когда сможете: программа идёт до 23:00, а дальше продолжается для желающих.</p></details>
+      <details><summary>Я опоздаю — это ок?</summary><p>Конечно. Приходите, когда сможете: программа идёт до полуночи, а дальше продолжается для желающих.</p></details>
       <details><summary>Нужен ли пропуск или паспорт?</summary><p>Нет, пропуск не нужен.</p></details>
       <details><summary>Будет ли еда для вегетарианцев?</summary><p>Отдельной еды для вегетарианцев не будет.</p></details>
       <details><summary>Я оплатил, но не смогу прийти</summary><p>Напишите организаторам.</p></details>
@@ -374,8 +376,8 @@ const CONFIG = {
   // Дата в формате 'ГГГГ-ММ-ДД'. Пока null — «Дата уточняется»,
   // таймер и кнопка календаря скрыты.
   eventDate: '2026-11-26',
-  startTime: '19:00',
-  endTime: '23:00',
+  startTime: '16:00',
+  endTime: '00:00',
 
   address: 'Москва, Измайловское шоссе, 73Ж, стр. 33',
 
@@ -389,8 +391,7 @@ const CONFIG = {
   qrImage: 'data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27148%27%20height%3D%27148%27%20class%3D%27segno%27%3E%3Cg%20transform%3D%27scale%284%29%27%3E%3Cpath%20fill%3D%27%23fff%27%20d%3D%27M0%200h37v37h-37z%27%2F%3E%3Cpath%20class%3D%27qrline%27%20stroke%3D%27%23111%27%20d%3D%27M2%202.5h7m1%200h1m1%200h3m5%200h4m1%200h1m2%200h7m-33%201h1m5%200h1m5%200h3m11%200h1m5%200h1m-33%201h1m1%200h3m1%200h1m3%200h1m1%200h2m2%200h1m2%200h1m1%200h1m4%200h1m1%200h3m1%200h1m-33%201h1m1%200h3m1%200h1m2%200h1m1%200h1m8%200h1m1%200h1m1%200h1m1%200h1m1%200h3m1%200h1m-33%201h1m1%200h3m1%200h1m1%200h2m1%200h1m3%200h1m2%200h3m1%200h1m3%200h1m1%200h3m1%200h1m-33%201h1m5%200h1m1%200h1m1%200h2m3%200h1m1%200h1m2%200h1m1%200h1m1%200h1m1%200h1m5%200h1m-33%201h7m1%200h1m1%200h1m1%200h1m1%200h1m1%200h1m1%200h1m1%200h1m1%200h1m1%200h1m1%200h7m-22%201h1m2%200h3m1%200h2m1%200h1m1%200h1m-23%201h7m1%200h3m3%200h1m1%200h2m1%200h1m1%200h3m2%200h2m3%200h1m-33%201h1m1%200h2m4%200h1m5%200h1m1%200h6m1%200h1m2%200h2m1%200h2m1%200h1m-33%201h1m1%200h1m1%200h1m1%200h4m1%200h1m1%200h1m1%200h1m1%200h2m6%200h1m2%200h1m1%200h1m-31%201h1m1%200h1m5%200h2m1%200h1m1%200h2m4%200h1m1%200h4m3%200h4m-30%201h1m1%200h1m1%200h1m3%200h2m1%200h1m2%200h1m1%200h1m1%200h1m1%200h1m1%200h2m2%200h2m1%200h1m-32%201h1m1%200h1m2%200h1m1%200h2m4%200h1m1%200h1m1%200h7m1%200h3m1%200h1m1%200h2m-33%201h1m1%200h2m2%200h2m2%200h5m1%200h1m3%200h1m1%200h1m2%200h3m1%200h1m1%200h1m-30%201h1m4%200h1m2%200h2m5%200h3m1%200h2m1%200h3m2%200h2m-31%201h2m2%200h1m1%200h1m6%200h3m1%200h1m4%200h2m1%200h1m1%200h3m2%200h1m-33%201h3m2%200h1m1%200h2m2%200h1m1%200h2m3%200h4m1%200h1m2%200h2m1%200h4m-32%201h9m4%200h1m5%200h1m1%200h1m2%200h1m1%200h2m1%200h2m-31%201h2m2%200h1m2%200h1m1%200h1m3%200h2m1%200h1m1%200h1m1%200h10m1%200h1m-33%201h1m4%200h4m1%200h5m1%200h3m1%200h3m1%200h2m1%200h1m1%200h1m-30%201h4m5%200h2m1%200h2m1%200h3m1%200h1m1%200h2m7%200h1m1%200h1m-33%201h1m2%200h1m1%200h2m1%200h1m1%200h2m1%200h1m2%200h2m2%200h3m1%200h3m1%200h2m1%200h1m-32%201h1m6%200h1m1%200h5m2%200h1m1%200h1m1%200h4m1%200h1m2%200h3m1%200h1m-33%201h1m2%200h2m1%200h1m3%200h1m1%200h1m1%200h1m2%200h1m2%200h1m1%200h1m1%200h5m2%200h2m-25%201h2m1%200h7m1%200h2m1%200h3m3%200h1m1%200h3m-33%201h7m1%200h1m1%200h1m1%200h1m1%200h2m5%200h1m1%200h2m1%200h1m1%200h1m1%200h2m-32%201h1m5%200h1m1%200h3m2%200h1m2%200h1m1%200h7m3%200h3m1%200h1m-33%201h1m1%200h3m1%200h1m1%200h2m1%200h1m2%200h1m3%200h2m2%200h1m1%200h6m1%200h2m-33%201h1m1%200h3m1%200h1m1%200h5m4%200h1m1%200h3m1%200h3m2%200h2m2%200h1m-33%201h1m1%200h3m1%200h1m1%200h1m1%200h1m2%200h1m1%200h3m5%200h2m1%200h2m2%200h1m-31%201h1m5%200h1m1%200h1m1%200h2m5%200h5m1%200h1m1%200h1m2%200h1m1%200h1m-31%201h7m3%200h2m3%200h3m1%200h1m4%200h2m1%200h1m3%200h1%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E',                          // QR как data:image/png;base64,... ; пусто — заглушка
 
   organizers: [
-    { name: 'Имя Фамилия', role: 'Общие вопросы',          tg: 'username1' },
-    { name: 'Василий Колесников', role: 'Сбор взносов',          tg: 'Kitakaze23' },
+    { name: 'Василий Колесников', role: 'Общие вопросы и сбор взносов', tg: 'Kitakaze23' },
   ],
 };
 
@@ -462,6 +463,7 @@ const WEEKDAYS = ['воскресенье','понедельник','вторн�
 if (CONFIG.eventDate) {
   const start = new Date(`${CONFIG.eventDate}T${CONFIG.startTime}:00+03:00`);
   const end = new Date(`${CONFIG.eventDate}T${CONFIG.endTime}:00+03:00`);
+  if (end <= start) end.setDate(end.getDate() + 1); // окончание после полуночи
   const [y, m, d] = CONFIG.eventDate.split('-').map(Number);
   const wd = new Date(Date.UTC(y, m - 1, d)).getUTCDay();
   $('f-date').textContent = `${d} ${MONTHS[m - 1]}, ${WEEKDAYS[wd]}`;
@@ -480,7 +482,7 @@ if (CONFIG.eventDate) {
   cal.searchParams.set('text', 'Beer Party IT HUB');
   cal.searchParams.set('dates', `${fmt(start)}/${fmt(end)}`);
   cal.searchParams.set('location', CONFIG.address);
-  cal.searchParams.set('details', 'Сбор гостей с 19:00. Программа и детали — в боте.');
+  cal.searchParams.set('details', `Сбор гостей с ${CONFIG.startTime}. Программа и детали — в боте.`);
   $('cal-btn').href = cal.toString();
   $('cal-btn').removeAttribute('aria-disabled');
 }
