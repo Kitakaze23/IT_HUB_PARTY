@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
-<title>Корпоратив IT HUB</title>
+<title>Beer Party IT HUB</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -225,7 +225,7 @@
   <div class="wrap">
     <div class="hero-text">
       <div class="prompt">~/it-hub $ <b>./party --start</b><span class="cursor"></span></div>
-      <h1>корпоратив it hub<small>вечер без дейликов, тикетов и созвонов</small></h1>
+      <h1>beer party it hub<small>вечер без дейликов, тикетов и созвонов</small></h1>
       <ul class="facts">
         <li><span class="k">когда</span><span class="v" id="f-date">Дата уточняется</span></li>
         <li><span class="k">время</span><span class="v">19:00 — 23:00<small>дальше — по желанию</small></span></li>
@@ -268,9 +268,9 @@
       <div class="addr">Москва, Измайловское шоссе, 73Ж, стр. 33</div>
       <div class="metro"><i>3</i>Партизанская</div>
       <ol class="steps">
-        <li>[заполнить: какой выход из метро]</li>
-        <li>[заполнить: сколько минут пешком и куда идти]</li>
-        <li>[заполнить: ориентир у входа, этаж или домофон]</li>
+        <li>Выход из метро № 1</li>
+        <li>Пешком 8 минут в сторону Измайловского кремля</li>
+        <li>Номер лофта сообщим позже</li>
       </ol>
       <div class="pills">
         <a class="pill" id="map-yandex" href="#" target="_blank" rel="noopener">яндекс карты &gt;</a>
@@ -282,8 +282,7 @@
     <section id="pay">
       <h2>взнос</h2>
       <ul class="tiers">
-        <li><span>9 грейд</span><span class="dots"></span><span class="p">2 500 ₽</span></li>
-        <li><span>10 грейд и вендоры</span><span class="dots"></span><span class="p">2 500 ₽</span></li>
+        <li><span>до 10 грейда и вендоры</span><span class="dots"></span><span class="p">2 500 ₽</span></li>
         <li><span>11 грейд и выше</span><span class="dots"></span><span class="p">3 000 ₽</span></li>
       </ul>
       <div class="req">
@@ -296,7 +295,7 @@
         </div>
         <div class="pills" id="pay-link-wrap"><a class="pill" id="pay-link" href="#" target="_blank" rel="noopener">перейти к оплате &gt;</a></div>
         <div class="qr">
-          <div class="qr-box" id="qr-box">qr-код<br>(заглушка)</div>
+          <div class="qr-box" id="qr-box">qr-код</div>
           <p>QR пригодится, если страница открыта на компьютере: отсканируйте его телефоном.</p>
         </div>
       </div>
@@ -345,15 +344,15 @@ const CONFIG = {
 
   address: 'Москва, Измайловское шоссе, 73Ж, стр. 33',
 
-  payPhone: '+7 (900) 000-00-00',      // номер для перевода по СБП
-  payRecipient: 'Имя Ф. · Банк',       // кому и в какой банк
-  payUrl: '',                           // ссылка на сбор; пусто — кнопка скрыта
-  payDeadline: '[дата]',                // например: '5 декабря'
-  qrImage: '',                          // QR как data:image/png;base64,... ; пусто — заглушка
+  payPhone: '+7 (915) 116-73-76',      // номер для перевода по СБП
+  payRecipient: 'Василий К. · Сбербанк',       // кому и в какой банк
+  payUrl: 'https://messenger.sbrf.ru/sl/D4wE6InBswYne3suK',                           // ссылка на сбор; пусто — кнопка скрыта
+  payDeadline: '13 ноября 2026',                // например: '5 декабря'
+  qrImage: 'data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27148%27%20height%3D%27148%27%20class%3D%27segno%27%3E%3Cg%20transform%3D%27scale%284%29%27%3E%3Cpath%20fill%3D%27%23fff%27%20d%3D%27M0%200h37v37h-37z%27%2F%3E%3Cpath%20class%3D%27qrline%27%20stroke%3D%27%23111%27%20d%3D%27M2%202.5h7m1%200h1m1%200h3m5%200h4m1%200h1m2%200h7m-33%201h1m5%200h1m5%200h3m11%200h1m5%200h1m-33%201h1m1%200h3m1%200h1m3%200h1m1%200h2m2%200h1m2%200h1m1%200h1m4%200h1m1%200h3m1%200h1m-33%201h1m1%200h3m1%200h1m2%200h1m1%200h1m8%200h1m1%200h1m1%200h1m1%200h1m1%200h3m1%200h1m-33%201h1m1%200h3m1%200h1m1%200h2m1%200h1m3%200h1m2%200h3m1%200h1m3%200h1m1%200h3m1%200h1m-33%201h1m5%200h1m1%200h1m1%200h2m3%200h1m1%200h1m2%200h1m1%200h1m1%200h1m1%200h1m5%200h1m-33%201h7m1%200h1m1%200h1m1%200h1m1%200h1m1%200h1m1%200h1m1%200h1m1%200h1m1%200h1m1%200h7m-22%201h1m2%200h3m1%200h2m1%200h1m1%200h1m-23%201h7m1%200h3m3%200h1m1%200h2m1%200h1m1%200h3m2%200h2m3%200h1m-33%201h1m1%200h2m4%200h1m5%200h1m1%200h6m1%200h1m2%200h2m1%200h2m1%200h1m-33%201h1m1%200h1m1%200h1m1%200h4m1%200h1m1%200h1m1%200h1m1%200h2m6%200h1m2%200h1m1%200h1m-31%201h1m1%200h1m5%200h2m1%200h1m1%200h2m4%200h1m1%200h4m3%200h4m-30%201h1m1%200h1m1%200h1m3%200h2m1%200h1m2%200h1m1%200h1m1%200h1m1%200h1m1%200h2m2%200h2m1%200h1m-32%201h1m1%200h1m2%200h1m1%200h2m4%200h1m1%200h1m1%200h7m1%200h3m1%200h1m1%200h2m-33%201h1m1%200h2m2%200h2m2%200h5m1%200h1m3%200h1m1%200h1m2%200h3m1%200h1m1%200h1m-30%201h1m4%200h1m2%200h2m5%200h3m1%200h2m1%200h3m2%200h2m-31%201h2m2%200h1m1%200h1m6%200h3m1%200h1m4%200h2m1%200h1m1%200h3m2%200h1m-33%201h3m2%200h1m1%200h2m2%200h1m1%200h2m3%200h4m1%200h1m2%200h2m1%200h4m-32%201h9m4%200h1m5%200h1m1%200h1m2%200h1m1%200h2m1%200h2m-31%201h2m2%200h1m2%200h1m1%200h1m3%200h2m1%200h1m1%200h1m1%200h10m1%200h1m-33%201h1m4%200h4m1%200h5m1%200h3m1%200h3m1%200h2m1%200h1m1%200h1m-30%201h4m5%200h2m1%200h2m1%200h3m1%200h1m1%200h2m7%200h1m1%200h1m-33%201h1m2%200h1m1%200h2m1%200h1m1%200h2m1%200h1m2%200h2m2%200h3m1%200h3m1%200h2m1%200h1m-32%201h1m6%200h1m1%200h5m2%200h1m1%200h1m1%200h4m1%200h1m2%200h3m1%200h1m-33%201h1m2%200h2m1%200h1m3%200h1m1%200h1m1%200h1m2%200h1m2%200h1m1%200h1m1%200h5m2%200h2m-25%201h2m1%200h7m1%200h2m1%200h3m3%200h1m1%200h3m-33%201h7m1%200h1m1%200h1m1%200h1m1%200h2m5%200h1m1%200h2m1%200h1m1%200h1m1%200h2m-32%201h1m5%200h1m1%200h3m2%200h1m2%200h1m1%200h7m3%200h3m1%200h1m-33%201h1m1%200h3m1%200h1m1%200h2m1%200h1m2%200h1m3%200h2m2%200h1m1%200h6m1%200h2m-33%201h1m1%200h3m1%200h1m1%200h5m4%200h1m1%200h3m1%200h3m2%200h2m2%200h1m-33%201h1m1%200h3m1%200h1m1%200h1m1%200h1m2%200h1m1%200h3m5%200h2m1%200h2m2%200h1m-31%201h1m5%200h1m1%200h1m1%200h2m5%200h5m1%200h1m1%200h1m2%200h1m1%200h1m-31%201h7m3%200h2m3%200h3m1%200h1m4%200h2m1%200h1m3%200h1%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E',                          // QR как data:image/png;base64,... ; пусто — заглушка
 
   organizers: [
     { name: 'Имя Фамилия', role: 'Общие вопросы',          tg: 'username1' },
-    { name: 'Имя Фамилия', role: 'Оплата и списки гостей', tg: 'username2' },
+    { name: 'Василий Колесников', role: 'Сбор взносов',          tg: 'Kitakaze23' },
   ],
 };
 
@@ -440,7 +439,7 @@ if (CONFIG.eventDate) {
   const fmt = (dt) => dt.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
   const cal = new URL('https://calendar.google.com/calendar/render');
   cal.searchParams.set('action', 'TEMPLATE');
-  cal.searchParams.set('text', 'Корпоратив IT HUB');
+  cal.searchParams.set('text', 'Beer Party IT HUB');
   cal.searchParams.set('dates', `${fmt(start)}/${fmt(end)}`);
   cal.searchParams.set('location', CONFIG.address);
   cal.searchParams.set('details', 'Сбор гостей с 19:00. Программа и детали — в боте.');
