@@ -73,6 +73,32 @@
   h2{font-family:var(--round);font-weight:700;font-size:30px;letter-spacing:-.015em;text-transform:lowercase;margin-bottom:20px}
   .note{font-size:14px;color:var(--muted);margin-top:14px}
 
+  /* JOIN / RSVP */
+  .stats{display:flex;gap:28px;margin-bottom:18px;font-family:var(--round)}
+  .stats b{display:block;font-size:34px;font-weight:700;line-height:1.05;color:var(--accent-text)}
+  .stats span{font-size:13px;color:var(--muted)}
+  .rsvp{background:var(--panel);border-radius:16px;padding:18px}
+  .rsvp p{color:var(--muted);font-weight:300;margin-bottom:14px}
+  .seg{display:grid;gap:8px;margin-bottom:16px}
+  .seg label{cursor:pointer}
+  .seg input{position:absolute;opacity:0;pointer-events:none}
+  .seg span{display:flex;justify-content:space-between;gap:10px;padding:12px 16px;border-radius:14px;box-shadow:inset 0 0 0 1.5px var(--line);font-family:var(--round);font-weight:700;font-size:14px;text-transform:lowercase;transition:.15s}
+  .seg span em{font-style:normal;color:var(--muted);white-space:nowrap}
+  .seg input:checked+span{box-shadow:inset 0 0 0 2px var(--accent);background:color-mix(in srgb,var(--accent) 14%,transparent)}
+  .seg input:checked+span em{color:var(--text)}
+  .seg input:focus-visible+span{outline:2px solid var(--accent-text);outline-offset:2px}
+  .me{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px}
+  .me .ic{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#fff;font-weight:700}
+  .me .ic.wait{background:transparent;box-shadow:inset 0 0 0 2px var(--accent-text);color:var(--accent-text)}
+  .me b{font-family:var(--round);display:block;text-transform:lowercase}
+  .me small{display:block;color:var(--muted);font-size:14px}
+  .me + .me{margin-top:-2px}
+  .linkbtn{background:none;border:0;color:var(--muted);font:inherit;font-size:14px;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:8px 4px;margin-left:6px}
+  .rsvp .pill[disabled]{opacity:.55;pointer-events:none}
+  .err{color:#ff8f8f;font-size:14px;margin-top:10px}
+  #pay-mark{margin-top:16px}
+  #pay-mark:empty{display:none}
+
   /* PROGRAM */
   .prog{list-style:none}
   .prog li{display:grid;grid-template-columns:66px 1fr;gap:12px;padding:12px 0}
@@ -161,6 +187,7 @@
   <div class="bar-in">
     <a class="logo" href="#top" aria-label="IT HUB"><svg aria-hidden="true"><use href="#mark"/></svg><span><b>IT</b> HUB</span></a>
     <nav aria-label="Разделы">
+      <a href="#join">участие</a>
       <a href="#program">программа</a>
       <a href="#place">место</a>
       <a href="#pay">взнос</a>
@@ -242,6 +269,13 @@
       </div>
     </div>
 
+    <!-- УЧАСТИЕ -->
+    <section id="join" hidden>
+      <h2>участие</h2>
+      <div class="stats"><div><b id="st-going">—</b><span>идут</span></div><div><b id="st-paid">—</b><span>оплатили</span></div></div>
+      <div class="rsvp" id="rsvp"><p>Загружаем…</p></div>
+    </section>
+
     <!-- ПРОГРАММА -->
     <section id="program">
       <h2>программа</h2>
@@ -300,6 +334,7 @@
         </div>
       </div>
       <p class="deadline">Оплатить до <b id="pay-deadline">[дата]</b>. В комментарии к переводу укажите <b>имя и фамилию</b>, чтобы мы отметили оплату.</p>
+      <div id="pay-mark"></div>
     </section>
   </div>
 
@@ -348,6 +383,9 @@ const CONFIG = {
   payRecipient: 'Василий К. · Сбербанк',       // кому и в какой банк
   payUrl: 'https://messenger.sbrf.ru/sl/D4wE6InBswYne3suK',                           // ссылка на сбор; пусто — кнопка скрыта
   payDeadline: '13 ноября 2026',                // например: '5 декабря'
+  // Ссылка на веб-приложение Google Apps Script (…/exec). Пусто — блок «участие» скрыт.
+  apiUrl: 'https://script.google.com/macros/s/AKfycbyVvsKfhXSA08wVjQG2uRAcEkDEflRY6r6sbBDfEZvoAloKLe-e5iV07RXqagM0GZtV/exec',
+
   qrImage: 'data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27148%27%20height%3D%27148%27%20class%3D%27segno%27%3E%3Cg%20transform%3D%27scale%284%29%27%3E%3Cpath%20fill%3D%27%23fff%27%20d%3D%27M0%200h37v37h-37z%27%2F%3E%3Cpath%20class%3D%27qrline%27%20stroke%3D%27%23111%27%20d%3D%27M2%202.5h7m1%200h1m1%200h3m5%200h4m1%200h1m2%200h7m-33%201h1m5%200h1m5%200h3m11%200h1m5%200h1m-33%201h1m1%200h3m1%200h1m3%200h1m1%200h2m2%200h1m2%200h1m1%200h1m4%200h1m1%200h3m1%200h1m-33%201h1m1%200h3m1%200h1m2%200h1m1%200h1m8%200h1m1%200h1m1%200h1m1%200h1m1%200h3m1%200h1m-33%201h1m1%200h3m1%200h1m1%200h2m1%200h1m3%200h1m2%200h3m1%200h1m3%200h1m1%200h3m1%200h1m-33%201h1m5%200h1m1%200h1m1%200h2m3%200h1m1%200h1m2%200h1m1%200h1m1%200h1m1%200h1m5%200h1m-33%201h7m1%200h1m1%200h1m1%200h1m1%200h1m1%200h1m1%200h1m1%200h1m1%200h1m1%200h1m1%200h7m-22%201h1m2%200h3m1%200h2m1%200h1m1%200h1m-23%201h7m1%200h3m3%200h1m1%200h2m1%200h1m1%200h3m2%200h2m3%200h1m-33%201h1m1%200h2m4%200h1m5%200h1m1%200h6m1%200h1m2%200h2m1%200h2m1%200h1m-33%201h1m1%200h1m1%200h1m1%200h4m1%200h1m1%200h1m1%200h1m1%200h2m6%200h1m2%200h1m1%200h1m-31%201h1m1%200h1m5%200h2m1%200h1m1%200h2m4%200h1m1%200h4m3%200h4m-30%201h1m1%200h1m1%200h1m3%200h2m1%200h1m2%200h1m1%200h1m1%200h1m1%200h1m1%200h2m2%200h2m1%200h1m-32%201h1m1%200h1m2%200h1m1%200h2m4%200h1m1%200h1m1%200h7m1%200h3m1%200h1m1%200h2m-33%201h1m1%200h2m2%200h2m2%200h5m1%200h1m3%200h1m1%200h1m2%200h3m1%200h1m1%200h1m-30%201h1m4%200h1m2%200h2m5%200h3m1%200h2m1%200h3m2%200h2m-31%201h2m2%200h1m1%200h1m6%200h3m1%200h1m4%200h2m1%200h1m1%200h3m2%200h1m-33%201h3m2%200h1m1%200h2m2%200h1m1%200h2m3%200h4m1%200h1m2%200h2m1%200h4m-32%201h9m4%200h1m5%200h1m1%200h1m2%200h1m1%200h2m1%200h2m-31%201h2m2%200h1m2%200h1m1%200h1m3%200h2m1%200h1m1%200h1m1%200h10m1%200h1m-33%201h1m4%200h4m1%200h5m1%200h3m1%200h3m1%200h2m1%200h1m1%200h1m-30%201h4m5%200h2m1%200h2m1%200h3m1%200h1m1%200h2m7%200h1m1%200h1m-33%201h1m2%200h1m1%200h2m1%200h1m1%200h2m1%200h1m2%200h2m2%200h3m1%200h3m1%200h2m1%200h1m-32%201h1m6%200h1m1%200h5m2%200h1m1%200h1m1%200h4m1%200h1m2%200h3m1%200h1m-33%201h1m2%200h2m1%200h1m3%200h1m1%200h1m1%200h1m2%200h1m2%200h1m1%200h1m1%200h5m2%200h2m-25%201h2m1%200h7m1%200h2m1%200h3m3%200h1m1%200h3m-33%201h7m1%200h1m1%200h1m1%200h1m1%200h2m5%200h1m1%200h2m1%200h1m1%200h1m1%200h2m-32%201h1m5%200h1m1%200h3m2%200h1m2%200h1m1%200h7m3%200h3m1%200h1m-33%201h1m1%200h3m1%200h1m1%200h2m1%200h1m2%200h1m3%200h2m2%200h1m1%200h6m1%200h2m-33%201h1m1%200h3m1%200h1m1%200h5m4%200h1m1%200h3m1%200h3m2%200h2m2%200h1m-33%201h1m1%200h3m1%200h1m1%200h1m1%200h1m2%200h1m1%200h3m5%200h2m1%200h2m2%200h1m-31%201h1m5%200h1m1%200h1m1%200h2m5%200h5m1%200h1m1%200h1m2%200h1m1%200h1m-31%201h7m3%200h2m3%200h3m1%200h1m4%200h2m1%200h1m3%200h1%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E',                          // QR как data:image/png;base64,... ; пусто — заглушка
 
   organizers: [
@@ -469,6 +507,96 @@ $('people').innerHTML = CONFIG.organizers.map(p => `
   <a class="pill" href="https://t.me/${p.tg}" target="_blank" rel="noopener">написать &gt;</a></li>`).join('');
 $('foot').innerHTML = CONFIG.organizers.map(p =>
   `<a href="https://t.me/${p.tg}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#tg"/></svg>@${p.tg}</a>`).join('');
+
+
+// --- RSVP & payment tracking (Google Sheets via Apps Script)
+const PRICES = { low: '2 500 ₽', high: '3 000 ₽' };
+const CAT_NAMES = { low: 'до 10 грейда и вендоры', high: '11 грейд и выше' };
+const initData = inTelegram ? (tg.initData || '') : '';
+let me = null, busy = false, lastError = '';
+
+async function api(action, extra) {
+  const u = new URL(CONFIG.apiUrl);
+  u.searchParams.set('action', action);
+  if (initData) u.searchParams.set('initData', initData);
+  Object.entries(extra || {}).forEach(([k, v]) => u.searchParams.set(k, v));
+  const r = await fetch(u.toString());
+  const j = await r.json();
+  if (!j.ok) throw new Error(j.error || 'Ошибка');
+  return j;
+}
+function apply(j) {
+  me = j.me;
+  $('st-going').textContent = j.stats.going;
+  $('st-paid').textContent = j.stats.paid;
+  render();
+}
+async function act(action, extra) {
+  if (busy) return;
+  busy = true; lastError = ''; render();
+  try { apply(await api(action, extra)); notify('success'); }
+  catch (e) { lastError = e.message; notify('error'); }
+  busy = false; render();
+}
+function notify(type) { try { inTelegram && tg.HapticFeedback.notificationOccurred(type); } catch (e) {} }
+
+function statusBlocks() {
+  const cat = `${CAT_NAMES[me.category]} · взнос ${PRICES[me.category]}`;
+  let html = `<div class="me"><span class="ic">✓</span><div><b>вы в списке</b><small>${cat}</small></div></div>`;
+  if (me.payment === 'claimed')
+    html += `<div class="me"><span class="ic wait">…</span><div><b>оплата отмечена</b><small>Василий сверит перевод и подтвердит</small></div></div>`;
+  if (me.payment === 'confirmed')
+    html += `<div class="me"><span class="ic">₽</span><div><b>оплата подтверждена</b><small>До встречи! 🍻</small></div></div>`;
+  return html;
+}
+function render() {
+  const box = $('rsvp'), pm = $('pay-mark');
+  const err = lastError ? `<div class="err">${lastError}</div>` : '';
+  const dis = busy ? 'disabled' : '';
+  if (!initData) {
+    box.innerHTML = `<p style="margin:0">Чтобы отметиться, откройте эту страницу через бота в Telegram.</p>`;
+    pm.innerHTML = ''; return;
+  }
+  if (!me || !me.going) {
+    const sel = (me && me.category) || 'low';
+    box.innerHTML = `
+      <p>${me ? 'Передумали? Можно снова отметиться.' : 'Отметьтесь, чтобы мы знали, на сколько человек брать пиво и пиццу.'}</p>
+      <div class="seg" role="radiogroup" aria-label="Категория взноса">
+        <label><input type="radio" name="cat" value="low" ${sel === 'low' ? 'checked' : ''}><span>${CAT_NAMES.low}<em>${PRICES.low}</em></span></label>
+        <label><input type="radio" name="cat" value="high" ${sel === 'high' ? 'checked' : ''}><span>${CAT_NAMES.high}<em>${PRICES.high}</em></span></label>
+      </div>
+      <button class="pill" data-act="join" ${dis}>${busy ? 'отмечаем…' : 'я иду &gt;'}</button>${err}`;
+    pm.innerHTML = ''; return;
+  }
+  const payBtn = me.payment === 'none'
+    ? `<button class="pill" data-act="paid" ${dis}>${busy ? 'отмечаем…' : 'я оплатил'}</button>` : '';
+  box.innerHTML = statusBlocks() +
+    (me.payment === 'none' ? `<p>Переведите взнос (раздел «взнос»), затем нажмите «я оплатил».</p>` : '') +
+    `<div>${payBtn}<button class="linkbtn" data-act="cancel" ${dis}>не смогу прийти</button></div>${err}`;
+  pm.innerHTML = me.payment === 'none'
+    ? `<div class="pills"><button class="pill ghost" data-act="paid" ${dis}>перевёл — отметить оплату</button></div>`
+    : `<div class="me"><span class="ic ${me.payment === 'claimed' ? 'wait' : ''}">${me.payment === 'claimed' ? '…' : '✓'}</span><div><b>${me.payment === 'claimed' ? 'оплата отмечена' : 'оплата подтверждена'}</b></div></div>`;
+}
+document.addEventListener('click', (e) => {
+  const b = e.target.closest('[data-act]');
+  if (!b) return;
+  const a = b.dataset.act;
+  if (a === 'join') {
+    const c = document.querySelector('input[name="cat"]:checked');
+    act('join', { cat: c ? c.value : 'low' });
+  } else if (a === 'paid') {
+    act('paid');
+  } else if (a === 'cancel') {
+    const go = () => act('cancel');
+    if (inTelegram && tg.showConfirm) tg.showConfirm('Точно не сможете прийти?', ok => ok && go());
+    else go();
+  }
+});
+if (CONFIG.apiUrl) {
+  $('join').hidden = false;
+  render();
+  api('status').then(apply).catch(e => { lastError = 'Не удалось загрузить список: ' + e.message; render(); });
+}
 
 // --- Copy
 function toast(msg) {
