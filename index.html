@@ -256,7 +256,7 @@
       <ul class="facts">
         <li><span class="k">когда</span><span class="v" id="f-date">Дата уточняется</span></li>
         <li><span class="k">время</span><span class="v">16:00 — 00:00<small>дальше — по желанию</small></span></li>
-        <li><span class="k">где</span><span class="v">Измайловское ш., 73Ж, стр. 33<small>м. Партизанская</small></span></li>
+        <li><span class="k">где</span><span class="v" id="f-place">Измайловское ш., 73Ж, стр. 33<small>м. Партизанская</small></span></li>
       </ul>
       <div class="countdown" id="countdown" aria-live="polite">
         <div><b id="cd-d">0</b><span>дней</span></div>
@@ -300,7 +300,9 @@
     <!-- МЕСТО -->
     <section id="place">
       <h2>как нас найти</h2>
-      <div class="addr">Москва, Измайловское шоссе, 73Ж, стр. 33</div>
+      <div class="addr" id="addr">Москва, Измайловское шоссе, 73Ж, стр. 33</div>
+      <p class="note" id="place-tbd" hidden>Сообщим в боте ближе к дате.</p>
+      <div id="place-details">
       <div class="metro"><i>3</i>Партизанская</div>
       <ol class="steps">
         <li>Выход из метро № 1</li>
@@ -310,6 +312,7 @@
       <div class="pills">
         <a class="pill" id="map-yandex" href="#" target="_blank" rel="noopener">яндекс карты &gt;</a>
         <a class="pill ghost" id="map-2gis" href="#" target="_blank" rel="noopener">2гис</a>
+      </div>
       </div>
     </section>
 
@@ -379,7 +382,9 @@ const CONFIG = {
   startTime: '16:00',
   endTime: '00:00',
 
-  address: 'Москва, Измайловское шоссе, 73Ж, стр. 33',
+  // Пусто — везде «Адрес уточняется», маршрут и кнопки карт скрыты.
+  // Чтобы вернуть прежний адрес: 'Москва, Измайловское шоссе, 73Ж, стр. 33'
+  address: '',
 
   payPhone: '+7 (915) 116-73-76',      // номер для перевода по СБП
   payRecipient: 'Василий К. · Сбербанк',       // кому и в какой банк
@@ -481,16 +486,23 @@ if (CONFIG.eventDate) {
   cal.searchParams.set('action', 'TEMPLATE');
   cal.searchParams.set('text', 'Beer Party IT HUB');
   cal.searchParams.set('dates', `${fmt(start)}/${fmt(end)}`);
-  cal.searchParams.set('location', CONFIG.address);
+  if (CONFIG.address) cal.searchParams.set('location', CONFIG.address);
   cal.searchParams.set('details', `Сбор гостей с ${CONFIG.startTime}. Программа и детали — в боте.`);
   $('cal-btn').href = cal.toString();
   $('cal-btn').removeAttribute('aria-disabled');
 }
 
 // --- Maps
-const q = encodeURIComponent(CONFIG.address);
-$('map-yandex').href = `https://yandex.ru/maps/?text=${q}`;
-$('map-2gis').href = `https://2gis.ru/moscow/search/${q}`;
+if (CONFIG.address) {
+  const q = encodeURIComponent(CONFIG.address);
+  $('map-yandex').href = `https://yandex.ru/maps/?text=${q}`;
+  $('map-2gis').href = `https://2gis.ru/moscow/search/${q}`;
+} else {
+  $('f-place').textContent = 'Адрес уточняется';
+  $('addr').textContent = 'Адрес уточняется';
+  $('place-details').hidden = true;
+  $('place-tbd').hidden = false;
+}
 
 // --- Payment
 $('pay-phone').textContent = CONFIG.payPhone;
