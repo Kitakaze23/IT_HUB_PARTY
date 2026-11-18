@@ -256,7 +256,7 @@
       <ul class="facts">
         <li><span class="k">когда</span><span class="v" id="f-date">Дата уточняется</span></li>
         <li><span class="k">время</span><span class="v">16:00 — 00:00<small>дальше — по желанию</small></span></li>
-        <li><span class="k">где</span><span class="v" id="f-place">Измайловское ш., 73Ж, стр. 33<small>м. Партизанская</small></span></li>
+        <li><span class="k">где</span><span class="v" id="f-place">ЦАО Лофт<small>Варшавское ш., 33, стр. 13</small><small>МЦК Верхние Котлы</small></span></li>
       </ul>
       <div class="countdown" id="countdown" aria-live="polite">
         <div><b id="cd-d">0</b><span>дней</span></div>
@@ -300,14 +300,13 @@
     <!-- МЕСТО -->
     <section id="place">
       <h2>как нас найти</h2>
-      <div class="addr" id="addr">Москва, Измайловское шоссе, 73Ж, стр. 33</div>
+      <div class="addr" id="addr">ЦАО Лофт<br>Москва, Варшавское шоссе, 33, стр. 13</div>
       <p class="note" id="place-tbd" hidden>Сообщим в боте ближе к дате.</p>
       <div id="place-details">
-      <div class="metro"><i>3</i>Партизанская</div>
+      <div class="metro"><i style="width:auto;padding:0 6px;border-radius:10px;background:#d6083b;font-size:10px">МЦК</i>Верхние Котлы</div>
       <ol class="steps">
-        <li>Выход из метро № 1</li>
-        <li>Пешком 8 минут в сторону Измайловского кремля</li>
-        <li>Номер лофта сообщим позже</li>
+        <li>Выход № 1 со станции МЦК «Верхние Котлы»</li>
+        <li>Пешком 5 минут до Варшавского шоссе, 33, стр. 13</li>
       </ol>
       <div class="pills">
         <a class="pill" id="map-yandex" href="#" target="_blank" rel="noopener">яндекс карты &gt;</a>
@@ -383,8 +382,8 @@ const CONFIG = {
   endTime: '00:00',
 
   // Пусто — везде «Адрес уточняется», маршрут и кнопки карт скрыты.
-  // Чтобы вернуть прежний адрес: 'Москва, Измайловское шоссе, 73Ж, стр. 33'
-  address: '',
+  address: 'Москва, Варшавское шоссе, 33, стр. 13',
+  venue: 'ЦАО Лофт',
 
   payPhone: '+7 (915) 116-73-76',      // номер для перевода по СБП
   payRecipient: 'Василий К. · Сбербанк',       // кому и в какой банк
@@ -486,7 +485,7 @@ if (CONFIG.eventDate) {
   cal.searchParams.set('action', 'TEMPLATE');
   cal.searchParams.set('text', 'Beer Party IT HUB');
   cal.searchParams.set('dates', `${fmt(start)}/${fmt(end)}`);
-  if (CONFIG.address) cal.searchParams.set('location', CONFIG.address);
+  if (CONFIG.address) cal.searchParams.set('location', [CONFIG.venue, CONFIG.address].filter(Boolean).join(', '));
   cal.searchParams.set('details', `Сбор гостей с ${CONFIG.startTime}. Программа и детали — в боте.`);
   $('cal-btn').href = cal.toString();
   $('cal-btn').removeAttribute('aria-disabled');
