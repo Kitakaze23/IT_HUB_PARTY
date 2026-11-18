@@ -57,6 +57,11 @@
   .cursor{display:inline-block;width:8px;height:15px;background:var(--accent-text);vertical-align:-2px;margin-left:2px;animation:blink 1.1s steps(1) infinite}
   @keyframes blink{50%{opacity:0}}
 
+  .cal-menu{display:flex;flex-wrap:wrap;gap:8px;margin-top:-6px;padding:12px;border-radius:16px;background:var(--panel)}
+  .cal-menu[hidden]{display:none}
+  .cal-menu .pill{font-size:14px;padding:10px 18px}
+  #cal-toggle[aria-expanded="true"]{box-shadow:inset 0 0 0 2px var(--accent)}
+
   /* PILLS */
   .pill{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-family:var(--round);font-weight:700;font-size:15px;text-transform:lowercase;text-decoration:none;color:#fff;background:var(--accent);border:0;border-radius:999px;padding:12px 26px;cursor:pointer;transition:transform .08s,filter .15s}
   .pill:hover{filter:brightness(1.08)}
@@ -255,7 +260,7 @@
       <h1>beer party it hub<small>вечер без дейликов, тикетов и созвонов</small></h1>
       <ul class="facts">
         <li><span class="k">когда</span><span class="v" id="f-date">Дата уточняется</span></li>
-        <li><span class="k">время</span><span class="v">16:00 — 00:00<small>дальше — по желанию</small></span></li>
+        <li><span class="k">время</span><span class="v">17:00 — 00:00<small>дальше — по желанию</small></span></li>
         <li><span class="k">где</span><span class="v" id="f-place">ЦАО Лофт<small>Варшавское ш., 33, стр. 13</small><small>МЦК Верхние Котлы</small></span></li>
       </ul>
       <div class="countdown" id="countdown" aria-live="polite">
@@ -265,7 +270,11 @@
       </div>
       <div class="pills">
         <a class="pill" href="#pay">оплатить взнос &gt;</a>
-        <a class="pill ghost" href="#program">программа</a>
+        <button class="pill ghost" id="cal-toggle" aria-expanded="false" aria-controls="cal-menu" hidden>добавить в календарь</button>
+      </div>
+      <div class="cal-menu" id="cal-menu" hidden>
+        <a class="pill ghost" id="cal-google" href="#" target="_blank" rel="noopener">google календарь</a>
+        <a class="pill ghost" id="cal-ics" href="event.ics" target="_blank" rel="noopener">iphone, outlook, яндекс</a>
       </div>
     </div>
 
@@ -280,17 +289,16 @@
     <section id="program">
       <h2>программа</h2>
       <ol class="prog">
-        <li><time>16:00</time><div><div class="t">Сбор гостей</div><div class="d">Welcome-drink, знакомимся и осматриваемся</div></div></li>
-        <li><time>16:30</time><div><div class="t">Открытие</div><div class="d">Пара слов от организаторов, без презентаций</div></div></li>
-        <li><time>17:00</time><div><div class="t">Пиво, пицца и еда</div><div class="d">Едим, пьём и болтаем не про работу</div></div></li>
-        <li><time>19:00</time><div><div class="t">Активности</div><div class="d">Квиз, игры, конкурсы</div></div></li>
-        <li><time>21:00</time><div><div class="t">Общее фото на память</div><div class="d">Собираемся все вместе в кадре</div></div></li>
-        <li><time>21:30</time><div><div class="t">Музыка и общение</div><div class="d">Свободная программа</div></div></li>
+        <li><time>17:00</time><div><div class="t">Сбор гостей</div><div class="d">Welcome-drink, знакомимся и осматриваемся</div></div></li>
+        <li><time>17:30</time><div><div class="t">Открытие</div><div class="d">Пара слов от организаторов, без презентаций</div></div></li>
+        <li><time>18:00</time><div><div class="t">Пиво, пицца и еда</div><div class="d">Едим, пьём и болтаем не про работу</div></div></li>
+        <li><time>20:00</time><div><div class="t">Активности</div><div class="d">Квиз, игры, конкурсы</div></div></li>
+        <li><time>22:00</time><div><div class="t">Общее фото на память</div><div class="d">Собираемся все вместе в кадре</div></div></li>
+        <li><time>22:30</time><div><div class="t">Музыка и общение</div><div class="d">Свободная программа</div></div></li>
         <li><time>00:00</time><div><div class="t">Официальное завершение</div><div class="d">Можно ехать домой, пока ходит метро</div></div></li>
         <li><time>00:00+</time><div><div class="t">Продолжение<span class="opt">по желанию</span></div><div class="d">Для тех, кто не готов расходиться</div></div></li>
       </ol>
       <p class="note">Программа предварительная. Если что-то поменяется, напишем в боте.</p>
-      <div class="pills" style="margin-top:16px"><a class="pill ghost" id="cal-btn" href="#" target="_blank" rel="noopener" aria-disabled="true">добавить в календарь</a></div>
     </section>
   </div>
 
@@ -378,7 +386,7 @@ const CONFIG = {
   // Дата в формате 'ГГГГ-ММ-ДД'. Пока null — «Дата уточняется»,
   // таймер и кнопка календаря скрыты.
   eventDate: '2026-11-26',
-  startTime: '16:00',
+  startTime: '17:00',
   endTime: '00:00',
 
   // Пусто — везде «Адрес уточняется», маршрут и кнопки карт скрыты.
@@ -487,8 +495,16 @@ if (CONFIG.eventDate) {
   cal.searchParams.set('dates', `${fmt(start)}/${fmt(end)}`);
   if (CONFIG.address) cal.searchParams.set('location', [CONFIG.venue, CONFIG.address].filter(Boolean).join(', '));
   cal.searchParams.set('details', `Сбор гостей с ${CONFIG.startTime}. Программа и детали — в боте.`);
-  $('cal-btn').href = cal.toString();
-  $('cal-btn').removeAttribute('aria-disabled');
+  $('cal-google').href = cal.toString();
+  $('cal-ics').href = new URL('event.ics', location.href).toString();
+  const tgl = $('cal-toggle');
+  tgl.hidden = false;
+  tgl.addEventListener('click', () => {
+    const open = $('cal-menu').hidden;
+    $('cal-menu').hidden = !open;
+    tgl.setAttribute('aria-expanded', String(open));
+    haptic('light');
+  });
 }
 
 // --- Maps
